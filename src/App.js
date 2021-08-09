@@ -11,6 +11,8 @@ import {
   Image,
   ImageBackground,
 } from 'react-native';
+import CustomButton from './components/CustomButton';
+import Header from './components/Header';
 
 const App = () => {
   const [name, SetName] = useState('');
@@ -31,6 +33,7 @@ const App = () => {
       source={{
         uri: 'https://cdn.pixabay.com/photo/2013/07/12/12/35/texture-145968_960_720.png',
       }}>
+      <Header />
       <Modal
         visible={showWarning}
         transparent
@@ -62,16 +65,10 @@ const App = () => {
         placeholder="e.g. John"
         onChangeText={value => SetName(value)}
       />
-      <Pressable
-        onPress={onPressHandler}
-        hitSlop={{top: 10, bottom: 10, right: 10, left: 10}}
-        android_ripple={{color: '#00f'}}
-        style={({pressed}) => [
-          {backgroundColor: pressed ? '#dddddd' : '#00ff00'},
-          styles.button,
-        ]}>
-        <Text style={styles.text}>{submitted ? 'Clear' : 'Submit'}</Text>
-      </Pressable>
+      <CustomButton
+        onPressFunction={onPressHandler}
+        title={submitted ? 'Clear' : 'Submit'}
+      />
       {submitted ? (
         <View style={styles.body}>
           <Text style={styles.text}>You are registered as {name}</Text>
